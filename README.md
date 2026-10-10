@@ -14,17 +14,30 @@ manuscript/     main.tex, supporting.tex, references.bib, figures/, tables/
 notebooks/      the pipeline, 22 notebooks, in run order
 data/           the three source tables, 7,255 compounds
 manifest_stage_inputs.csv
+results.zip, explain.zip, models_*.zip — the stored artefacts, see below
 ```
 
-## What still has to be added before this repository is public
+## Archives
 
-These are not in this repository yet because they are large, and because they live in
-the Drive the pipeline wrote to:
+The stored artefacts are committed as archives because of the upload size limit. Unpack
+them beside `data/`, `manuscript/` and `notebooks/`, so that the pipeline finds them where
+it expects:
 
-- `models/` — model weights
-- `explain/` — atom-level attribution scores for the graph models
-- `results/` — the stored result files, including `primary_train.csv`,
-  `primary_valid.csv`, `primary_test.csv` and the fold assignments
+| Archive | Unpacks to | Holds |
+| --- | --- | --- |
+| `results.zip` | `results/` | the fold assignments, the selected hyperparameter configurations and every result file the analyses wrote |
+| `explain.zip` | `explain/` | atom-level attribution scores for the graph models |
+| `models_gin.zip` | `models/` | the twenty GIN attribution models and the five fitted on each corrected partition |
+| `models_gat.zip` | `models/` | the twenty GAT attribution models |
+| `models_gcn1.zip`, `models_gcn2.zip` | `models/` | the twenty GCN attribution models, split across two archives |
+
+The four `models_*` archives unpack into the same `models/` folder.
+
+The designated partition is in `results/primary_train.csv`, `primary_valid.csv` and
+`primary_test.csv`: 5,804, 725 and 726 compounds, 55.6%, 53.7% and 46.3% mutagenic.
+
+## Still to be added
+
 - `requirements.txt` — from `pip freeze` in the environment that ran the pipeline
 - `manifest.csv` — see below
 
