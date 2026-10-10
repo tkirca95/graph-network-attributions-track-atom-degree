@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+\centering
+\caption{Out-of-fold performance over all 7,255 compounds under scaffold-disjoint cross-validation. Every compound is predicted once by a model that never saw its scaffold.}
+\label{tab:accuracy}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
+\toprule
+Model & ROC-AUC & 95\% CI & PR-AUC & Sens. & Spec. & MCC \\
+\midrule
+GAT, no bond features & 0.854 & 0.845--0.863 & 0.863 & 0.800 & 0.755 & 0.555 \\
+GAT & 0.854 & 0.846--0.863 & 0.866 & 0.833 & 0.724 & 0.562 \\
+GIN & 0.845 & 0.836--0.854 & 0.853 & 0.779 & 0.786 & 0.564 \\
+XGBoost (RDKit-2D) & 0.845 & 0.837--0.854 & 0.864 & 0.722 & 0.821 & 0.541 \\
+GIN, no bond features & 0.844 & 0.835--0.853 & 0.843 & 0.819 & 0.729 & 0.552 \\
+GCN & 0.843 & 0.834--0.852 & 0.842 & 0.779 & 0.765 & 0.543 \\
+XGBoost (ECFP4) & 0.832 & 0.823--0.841 & 0.857 & 0.723 & 0.788 & 0.508 \\
+Random forest (ECFP4) & 0.821 & 0.811--0.830 & 0.847 & 0.717 & 0.804 & 0.520 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Confidence intervals from 10,000 bootstrap resamples of the compounds, drawn jointly across models. 11 of 15 pairwise comparisons among the six main models are resolved after Holm correction.\end{flushleft}
+\end{table}

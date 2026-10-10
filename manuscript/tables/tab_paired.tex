@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Each architecture against the model-free baseline, with molecules and models resampled together so that the uncertainty of the reference is carried. The last column repeats the same comparison with the baseline treated as a fixed number.}
+\label{tab:paired}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Architecture & $\Delta$ lift & 95\% CI & $p$ (Holm) & Fixed-reference $p$ \\
+\midrule
+GIN & +0.0518 & -0.014 to +0.119 & 0.242 & 0.040 \\
+GAT & -0.0112 & -0.046 to +0.025 & 0.537 & 0.365 \\
+GCN & -0.0606 & -0.114 to -0.008 & 0.077 & 0.007 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize No architecture is separated from the baseline once the reference is allowed to vary. Treating it as fixed narrows the interval by a factor of about two and produces the separations in the last column.\end{flushleft}
+\end{table}

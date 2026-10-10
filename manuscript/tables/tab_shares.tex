@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{The share of each architecture's above-chance signal that the model-free ranking supplies, with molecules and models resampled together.}
+\label{tab:shares}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+Architecture & Share & 95\% CI \\
+\midrule
+GIN & 81\% & 64--107\% \\
+GAT & 106\% & 89--127\% \\
+GCN & 140\% & 104--208\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The denominator is the architecture's own above-chance signal and is small for GCN, so the ratio is unstable there and the interval should be read as indicative. A share above 100\% would mean the baseline accounts for the whole of it; only for GCN does the interval lie entirely above that.\end{flushleft}
+\end{table}

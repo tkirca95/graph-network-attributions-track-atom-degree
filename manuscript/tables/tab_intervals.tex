@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{The model-free baseline with its interval, and the association with degree on a second set of molecules that carries no alert annotation.}
+\label{tab:intervals}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Quantity & Estimate & 95\% CI & Molecules positive \\
+\midrule
+Degree ranking, lift (molecules resampled) & 1.214 & 1.183--1.243 & -- \\
+$\rho$(IG, degree), untrained, Ames test (evaluation set) ($n$ = 200 draws) & 0.685 & -- & 98.5\% \\
+$\rho$(IG, degree), untrained, BBBP ($n$ = 200 draws) & 0.646 & -- & 99.0\% \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The shares of each architecture's above-chance signal are given with their intervals in Table~\ref{tab:shares}. The second set is drawn from a blood--brain barrier penetration dataset; the association with degree needs neither labels nor alerts.\end{flushleft}
+\end{table}

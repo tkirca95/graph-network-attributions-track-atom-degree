@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{The regime split under three readings of the fused-aromatic alert, from ring perception rather than a named substructure.}
+\label{tab:si_pattern}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcccccc}
+\toprule
+Reading & Molecules & Regime & $n$ & Degree & GIN & $\Delta$ & 95\% CI \\
+\midrule
+Two or more fused rings & 140 & Fused only & 127 & 1.189 & 0.892 & -0.297$^{*}$ & -0.391 to -0.203 \\
+Two or more fused rings & 140 & Fused removed & 174 & 1.214 & 1.732 & +0.517$^{*}$ & +0.364 to +0.683 \\
+Three or more & 89 & Fused only & 76 & 1.165 & 0.939 & -0.225$^{*}$ & -0.318 to -0.139 \\
+Three or more & 89 & Fused removed & 174 & 1.264 & 1.729 & +0.465$^{*}$ & +0.320 to +0.621 \\
+Four or more & 47 & Fused only & 34 & 1.108 & 0.917 & -0.192$^{*}$ & -0.277 to -0.115 \\
+Four or more & 47 & Fused removed & 174 & 1.287 & 1.735 & +0.448$^{*}$ & +0.307 to +0.597 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The molecule set of the fused-removed column is the same under all three readings, but the alert atoms are not: each reading withdraws a different set of atoms from the library, so the degree ranking moves while the model does not. Aromatic rings sharing atoms are merged into systems and thresholded on the number of rings, so angular systems such as phenanthrene and benzo[a]pyrene are counted; a query for a named linear acene would miss them. The sign of the difference is the same under all three readings.\end{flushleft}
+\end{table}

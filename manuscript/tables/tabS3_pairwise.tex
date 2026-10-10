@@ -1,0 +1,28 @@
+\begin{table}[htbp]
+\centering
+\caption{Pairwise differences between the six main models on the out-of-fold predictions.}
+\label{tab:si_pairwise}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccc}
+\toprule
+Model A & Model B & $\Delta$ & 95\% CI & $p$ (Holm) \\
+\midrule
+XGBoost (ECFP4) & Random forest (ECFP4) & +0.0116 & +0.0067 to +0.0164 & $<0.001$ \\
+XGBoost (ECFP4) & XGBoost (RDKit-2D) & -0.0129 & -0.0195 to -0.0064 & 0.001 \\
+XGBoost (ECFP4) & GCN & -0.0105 & -0.0179 to -0.0031 & 0.021 \\
+XGBoost (ECFP4) & GIN & -0.0130 & -0.0198 to -0.0062 & $<0.001$ \\
+XGBoost (ECFP4) & GAT & -0.0216 & -0.0289 to -0.0144 & $<0.001$ \\
+Random forest (ECFP4) & XGBoost (RDKit-2D) & -0.0244 & -0.0311 to -0.0180 & $<0.001$ \\
+Random forest (ECFP4) & GCN & -0.0221 & -0.0307 to -0.0136 & $<0.001$ \\
+Random forest (ECFP4) & GIN & -0.0245 & -0.0322 to -0.0168 & $<0.001$ \\
+Random forest (ECFP4) & GAT & -0.0332 & -0.0416 to -0.0249 & $<0.001$ \\
+XGBoost (RDKit-2D) & GCN & +0.0023 & -0.0048 to +0.0096 & 1.000 \\
+XGBoost (RDKit-2D) & GIN & -0.0001 & -0.0068 to +0.0067 & 1.000 \\
+XGBoost (RDKit-2D) & GAT & -0.0088 & -0.0158 to -0.0016 & 0.056 \\
+GCN & GIN & -0.0024 & -0.0082 to +0.0033 & 1.000 \\
+GCN & GAT & -0.0111 & -0.0162 to -0.0062 & $<0.001$ \\
+GIN & GAT & -0.0087 & -0.0142 to -0.0030 & 0.008 \\
+\bottomrule
+\end{tabular}
+\end{table}

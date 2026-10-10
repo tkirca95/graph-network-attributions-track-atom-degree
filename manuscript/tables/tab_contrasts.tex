@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{Paired contrasts on the out-of-fold predictions, isolating the molecular representation, the learner, the model family and bond features.}
+\label{tab:contrasts}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Contrast & $\Delta$ ROC-AUC & 95\% CI & $p$ \\
+\midrule
+Representation: ECFP4 to RDKit-2D & +0.0129 & +0.0064 to +0.0195 & $<0.001$ \\
+Learner: XGBoost to random forest & -0.0116 & -0.0164 to -0.0067 & $<0.001$ \\
+Family: classical to graph & +0.0146 & +0.0088 to +0.0204 & $<0.001$ \\
+Best of each family: GAT vs XGBoost (RDKit-2D) & +0.0088 & +0.0016 to +0.0158 & 0.014 \\
+GIN vs XGBoost (RDKit-2D) & +0.0001 & -0.0067 to +0.0068 & 0.988 \\
+GIN with and without bond features & +0.0017 & -0.0029 to +0.0063 & 0.471 \\
+GAT with and without bond features & -0.0002 & -0.0043 to +0.0039 & 0.926 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize $p$-values are uncorrected. Holm-corrected values for all fifteen pairwise comparisons among the six main models are given in the Supporting Information; under that correction the difference between the best model of each family gives $p = 0.056$.\end{flushleft}
+\end{table}

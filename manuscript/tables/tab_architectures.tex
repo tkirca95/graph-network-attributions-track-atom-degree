@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Attribution across three architectures, twenty models each. $\rho$ is the within-molecule association between Integrated Gradients and atom degree; $r$ is the correlation between the per-molecule agreement of the architecture and of the degree ranking.}
+\label{tab:architectures}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Architecture & Lift & $\rho$(IG, degree) & $r$ per molecule \\
+\midrule
+GIN & 1.265 $\pm$ 0.092 & 0.429 & 0.824 \\
+GAT & 1.203 $\pm$ 0.053 & 0.569 & 0.955 \\
+GCN & 1.153 $\pm$ 0.077 & 0.496 & 0.889 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The comparison of each architecture against the baseline is given in Table~1 of the manuscript, where the uncertainty of the baseline is carried. The association with degree is weakest in GIN and strongest in GAT.\end{flushleft}
+\end{table}

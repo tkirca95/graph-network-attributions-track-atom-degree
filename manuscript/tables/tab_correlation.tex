@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{What the per-molecule correlation with the degree ranking measures. The first column is the raw correlation of per-molecule overlaps, the second removes each molecule's chance coverage, and the third is the agreement between the atoms actually selected.}
+\label{tab:correlation}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Compared with degree & $r$ & $r$ given chance coverage & Jaccard of selected atoms \\
+\midrule
+untrained GIN & 0.943 & 0.567 & -- \\
+trained GIN & 0.826 & 0.309 & 0.331 \\
+random ranking & 0.807 & -0.033 & 0.189 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize A random ranking correlates with the degree ranking at 0.81 on the raw measure, so most of that quantity reflects the shared bound rather than agreement. The partial correlation and the Jaccard are the informative columns.\end{flushleft}
+\end{table}

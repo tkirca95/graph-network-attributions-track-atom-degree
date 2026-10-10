@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{Out-of-fold performance on the 725 compounds the hyperparameter search saw and on the 6,530 it did not.}
+\label{tab:si_optimism}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccccc}
+\toprule
+Model & Family & All & Search set & Rest & Optimism & 95\% CI \\
+\midrule
+XGBoost & Classical & 0.832 & 0.851 & 0.831 & +0.020 & -0.010 to +0.048 \\
+RandomForest & Classical & 0.821 & 0.861 & 0.818 & +0.044 & +0.015 to +0.071 \\
+XGBoost\_RDKit2D & Classical & 0.845 & 0.862 & 0.844 & +0.018 & -0.010 to +0.045 \\
+GCN & Graph & 0.843 & 0.844 & 0.843 & +0.001 & -0.030 to +0.030 \\
+GIN & Graph & 0.845 & 0.859 & 0.844 & +0.015 & -0.015 to +0.043 \\
+GAT & Graph & 0.854 & 0.842 & 0.855 & -0.013 & -0.044 to +0.016 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The two subsets are not matched on difficulty, so the absolute gap is not interpretable; only its spread across models is. The graph models carry -0.027 (-0.043 to -0.011) less optimism than the classical ones, so the family contrast of $+0.0146$ is if anything suppressed by the non-nested search rather than produced by it. The search set is a tenth of the data, so the effect on the pooled contrast is about a tenth of that difference; the figure here is not directly comparable with the contrast.\end{flushleft}
+\end{table}

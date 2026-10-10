@@ -1,0 +1,754 @@
+%% Supporting Information
+\documentclass[journal=jcisd8,manuscript=suppinfo]{achemso}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\SectionNumbersOn
+
+\author{Talha Kırca}
+\email{talhakirca@kmu.edu.tr}
+\affiliation{Department of Data Science and Analytics, Karamanoğlu Mehmetbey University, 70200 Karaman, Türkiye}
+\author{Hasan Yıldırım}
+\affiliation{Department of Data Science and Analytics, Karamanoğlu Mehmetbey University, 70200 Karaman, Türkiye}
+\author{Merve Görgülü}
+\affiliation{Department of Data Science and Analytics, Karamanoğlu Mehmetbey University, 70200 Karaman, Türkiye}
+
+\title[Supporting Information]
+{Supporting Information: Graph Network Attributions Track Atom Degree Before Training}
+
+\begin{document}
+
+\maketitle
+
+\section{The alert library}
+
+Table~\ref{tab:si_smarts} lists the eighteen SMARTS patterns, how many of the 237 evaluation
+molecules each matches, and the share of all alert atoms it contributes. The two columns tell
+different stories. The pattern for fused aromatic systems matches fewer than half the
+molecules but supplies more than three fifths of the atoms the agreement measure is scored
+against, because it matches whole ring systems while the heteroatom patterns match small
+groups. Any single agreement figure computed over the full library is therefore weighted
+heavily toward that one pattern.
+
+\input{tables/tabS12_smarts}
+
+\section{Data and search budget}
+
+Table~\ref{tab:si_data} records the curation of the benchmark and the composition of the
+designated partition.
+
+\input{tables/tabS1_data}
+Table~\ref{tab:si_hpo} gives the search budget and the selected configuration for every
+model.
+
+\input{tables/tabS2_hpo}
+
+Search spaces were the same for every model of a family. The gradient-boosted models were
+searched over tree depth, learning rate, subsample and column-sample fractions, minimum child
+weight and the two regularisation terms; the random forest over the number of trees, depth,
+and the split criteria; the graph models over hidden width, number of layers, dropout,
+learning rate, weight decay, batch size and the use of residual connections. Selected
+configurations are released as JSON with the pipeline.
+
+\section{Model comparison}
+
+Table~\ref{tab:si_pairwise} gives all fifteen pairwise differences among the six main models
+on the out-of-fold predictions, with Holm-corrected $p$-values.
+
+\input{tables/tabS3_pairwise}
+
+\section{Attribution}
+
+Table~\ref{tab:si_explainers} reports the four attribution methods on the designated
+partition using one representative model, which is how such comparisons are usually made. This model is not one of the twenty
+fitted later for the architecture comparison: it is the first of the three seeds used
+throughout Parts 2 to 5, fixed before any attribution was computed. Its agreement of $1.226$
+falls below the mean of the twenty, $1.265$, so figures computed on it are not
+interchangeable with the distribution the main text reports, and the two sets are named
+separately wherever both appear. The
+main text reports the same measurements across twenty models, and the difference between the
+two is the point of the corresponding section of the manuscript.
+
+\input{tables/tabS4_explainers}
+
+Figure~\ref{fig:si_protocol} contrasts the design a single untrained control supports with the
+one adopted here.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/figS3_protocol.pdf}
+\caption{The common design for a negative control, and the design used in this work.}
+\label{fig:si_protocol}
+\end{figure}
+
+Agreement is reported in the main text at a retained fraction of 30\% of atoms.
+Figure~\ref{fig:si_topk} shows the arms across fractions. The trained model lies within the
+central 95\% of the untrained draws at four of the five fractions and marginally above it at
+the smallest, where it reaches $1.362$ against an upper bound of $1.354$. Its margin over the
+degree ranking is not constant across fractions, and the main text reports that dependence
+with intervals.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/figS6_topk.pdf}
+\caption{Agreement across retained fractions. The shaded band is the central 95\% of 500
+untrained initialisations.}
+\label{fig:si_topk}
+\end{figure}
+
+Figure~\ref{fig:si_epoch} follows agreement and validation performance together over the
+course of training, averaged across five runs.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/figS7_epoch.pdf}
+\caption{Toxicophore agreement and validation ROC-AUC over training, averaged over five runs.
+The shaded band is one standard deviation across runs. Agreement plateaus while predictive performance
+continues to improve. The plateau lies below the value reached by the fully trained models of
+the main text, which are selected by early stopping and may run far beyond the epochs
+sampled here.}
+\label{fig:si_epoch}
+\end{figure}
+
+\section{Negative controls}
+
+Table~\ref{tab:si_permutation} reports the permutation control for both model families.
+
+\input{tables/tabS5_permutation}
+
+A model fitted to permuted labels is informative as a control only if it has fitted them.
+Regularisation and early stopping were therefore switched off and the budget escalated until
+the training ROC-AUC on the permuted target rose above 0.60 with a non-degenerate prediction
+distribution. The two arms are not matched. The graph arm carries fourteen repeats and the tree arm
+sixteen, and the two absorbed their randomised labels to different degrees, $0.874$ against
+$0.973$ in training ROC-AUC. A comparison between the families on this control should
+therefore be read as indicative rather than as a matched contrast.
+
+Runs that collapse to a constant output produce a random atom ranking and a
+lift of one by construction and test nothing. Under the escalation described above every
+graph repeat eventually absorbed its labels, so none was excluded.
+
+\section{Attribution rule and representation}
+
+Table~\ref{tab:si_2x2} separates the attribution rule from the molecular representation.
+
+\input{tables/tabS6_rule_representation}
+
+The two arms compared in the main text differ on two axes at once. Circular fingerprint bits
+are substructure counters and the alerts are substructures, so the fingerprint arm is aligned
+with the target by construction. Applying Integrated Gradients to a network over the same
+fingerprints, and mapping the attributions to atoms through the same bit-to-atom
+correspondence, fills the missing cell.
+
+\section{Mask-based explanation}
+
+Table~\ref{tab:si_gnnexplainer} reports mask-based explanation under three settings.
+
+\input{tables/tabS7_gnnexplainer}
+
+Mask entropy is normalised to the number of atoms in the molecule, so a value approaching one
+means the learned mask is close to uniform. A near-uniform mask does not produce an
+uninformative ranking so much as an arbitrary one, since the ordering it induces is then
+governed by numerical noise rather than by the optimisation.
+
+\section{The untrained distribution}
+
+Table~\ref{tab:si_nullhp} gives the sensitivity of the untrained distribution to the size of
+the network.
+
+\input{tables/tabS8_nullhp}
+
+The width of the untrained distribution differs markedly between architectures, from a
+standard deviation of 0.059 for GIN to 0.141 for GCN. Two further configurations of the same
+architecture, one narrower and shallower and one wider and deeper, do not reproduce that
+range, so the difference is not explained by the size of the network. It remains unexplained.
+
+\section{Calibration and conformal coverage}
+
+Neural networks are systematically overconfident and temperature scaling largely repairs
+it,\cite{guo2017calibration} uncertainty estimates in molecular property prediction have been
+benchmarked,\cite{scalia2020uncertainty} and calibration in toxicological models has been
+assessed with conformal prediction,\cite{bosc2021conformal,vovk2005} which is rarely reported
+alongside accuracy on this endpoint. What follows is that reporting for the models compared
+here.
+
+The two families separate on calibration, and in opposite directions
+(Figure~\ref{fig:si_cal}, Table~\ref{tab:calibration}). The random forest is
+underconfident with a fitted temperature of $0.70$ and XGBoost on fingerprints at $0.77$,
+while all three graph models sit above one, from $1.11$ for GCN to $1.46$ for GAT.
+Temperature scaling repairs the graph models and slightly harms XGBoost, whose expected
+calibration error rises from $0.059$ to $0.074$; the shift in class balance between the
+validation and test sets that scaffold partitioning produces is the likely cause.
+
+Under class-conditional conformal prediction at a nominal coverage of $0.90$ every model
+undercovers, between $0.869$ and $0.879$. With 726 test compounds the differences between
+models are not resolved, and which of them a given predictor flags depends on the predictor:
+the class-conditional one flags XGBoost and GCN, the marginal one only GCN. We report the
+general undercoverage and draw no conclusion about individual models.
+
+Conformal validity requires exchangeability between the calibration and test sets, which
+scaffold partitioning deliberately violates, and the designated partition also shifts the
+class balance from 53.7\% to 46.3\% mutagenic. The undercoverage seen across all five
+models is what that violation predicts, so the differences between models here should not be
+read as differences in reliability.
+
+One caveat limits how far this can be read. Every model was fitted with class weighting,
+which shifts predicted probabilities before any temperature is applied, and the direction of
+that shift differs between an averaged ensemble of trees and a network trained with a
+weighted loss. The separation between the families is therefore not attributable to the
+architecture alone.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig08_calibration.pdf}
+\caption{(a) Fitted temperature on the designated partition; values above one indicate
+overconfidence. (b) Reliability curves over eight equal-mass bins.}
+\label{fig:si_cal}
+\end{figure}
+
+\input{tables/tab_calibration}
+
+\section{Applicability domain}
+
+The median nearest-neighbour Tanimoto similarity of a test compound to the training set is
+$0.449$; at a threshold of $0.30$, 599 compounds fall inside the domain and 127 outside
+(Figure~\ref{fig:si_adf}, Table~\ref{tab:ad}). Every model degrades outside, and at every
+threshold from $0.15$ to $0.50$ the two classical models degrade more than the three graph
+models. The pattern does not survive a test: a paired bootstrap over test compounds gives a
+classical-minus-graph difference of $-0.048$ with a 95\% interval of $[-0.145, +0.043]$
+($p = 0.35$). With 127 compounds outside the domain the comparison lacks the resolution to
+support a claim in either direction.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig09_applicability.pdf}
+\caption{(a) Distribution of nearest-neighbour similarity to the training set. (b)
+Degradation outside the domain across thresholds. (c) The difference between the model
+families, with its bootstrap interval.}
+\label{fig:si_adf}
+\end{figure}
+
+\input{tables/tab_ad}
+
+\section{Decision rule}
+
+Table~\ref{tab:si_rules} lists every comparison made against the degree ranking with the
+correction family it belongs to, the test counts being read from the tables themselves rather
+than stated here.
+
+\input{tables/tabS15_rules}
+
+\section{Methods in full}
+
+\subsection{Search budget and training}
+
+Every model received 100 trials of Bayesian optimisation\cite{akiba2019} over its own search
+space. Training used Adam with a class-weighted binary cross-entropy loss; the epoch with the
+highest validation ROC-AUC was retained, and training stopped after 30 epochs without
+improvement, to a ceiling of 250. The same routine served the search and the final fits, so a
+configuration received the same budget when it was selected as when it was evaluated. Each
+model was fitted three times under different seeds and the reported prediction is the mean.
+
+The search was carried out once, on the designated partition, and the selected
+configurations were then used unchanged in the cross-validation. It was not nested inside the
+folds. Compounds used for tuning therefore appear in the test folds, which makes the
+out-of-fold estimates optimistic in absolute terms. The comparison between models is less affected, and
+that can be measured rather than assumed. Splitting the out-of-fold predictions into the 725
+compounds the search saw and the 6,530 it did not, every model scores higher on the first, as
+expected. The spread of that optimism across models is what matters for a contrast between
+them, and it runs against the reported result: the graph models carry $0.027$ ($0.011$ to
+$0.043$) less of it than the classical ones. The search set is a tenth of the data, so the
+effect on the pooled contrast is of order $0.003$, which does not account for a contrast of
+$+0.0146$ and does not run in the direction that would produce one (Supporting Information). The
+two subsets are not matched on difficulty and the absolute gap is not interpretable; only its
+spread across models is.
+
+An equal number of trials is not an equal amount of computation. Recorded search time was 17.4 minutes for the two classical models we timed against 237.2 for
+the three graph models. Timings for the descriptor model, the logistic regression and the
+ablated variants were not kept, so 13.6 to 1 is a lower bound on the disparity rather than a
+measurement of it. The imbalance runs in favour of the graph
+models, which received an order of magnitude more computation, so on that count the contrast
+between the families should be read as an upper bound on their advantage. Tuning exposure
+runs the other way, as measured below. We report the imbalance rather than
+equalise it: matching wall-clock time would mean granting the classical models many more
+trials than the hundred each family received, which is a different experiment from the one
+we set out to run.
+
+\subsection{Negative controls}
+
+Four controls bound what the measurement returns in the absence of learned chemistry, each
+with 500 draws so that the comparison is between distributions rather than points. Ranking
+atoms at random gives $0.9999$. Ranking them by a random non-negative weighting of their own
+feature vectors, with no message passing, gives $0.9724$. Random values passed through the
+bit-to-atom map used for TreeSHAP give $1.0052$. For each architecture, 500 networks were
+drawn from the initialisation distribution and scored identically.
+
+Twenty networks were then trained from independent seeds, their weights retained, and all
+four attribution methods computed on each. A data-randomisation control was run for both
+families: training and validation labels were permuted and each model fitted with
+regularisation and early stopping switched off, escalating the budget and lowering the
+learning rate until the randomised labels were absorbed. A model that has not fitted them
+tests nothing beyond an untrained one.
+
+\section{Supporting analyses}
+
+\subsection{The input encoding}
+
+Atom degree is one of the twenty-four atom features, and Integrated Gradients computed from a
+zero baseline assigns each feature an attribution proportional to its value. The contribution
+of the degree dimension to an atom is therefore monotone in its degree by construction, and
+that dimension is also the largest in magnitude, since the one-hot dimensions take values in
+$\{0,1\}$ while degree runs from one to five in this dataset. An association between attribution and degree
+could follow from the encoding alone, with no part played by message passing.
+
+Removing degree from the encoding does not remove the information, because a message-passing
+network can recover a node's degree from the structure of its neighbourhood. What removal
+closes is the direct path. Five hundred untrained networks under the reduced encoding give a
+within-molecule association of $0.497$, against $0.682$ under the full one, and the
+association remains positive in 92.7\% of molecules (Supporting Information).
+
+Removing degree alone is not the clean comparison, though. Degree and hydrogen count are
+complementary at fixed valence, so once degree is gone the hydrogen count becomes an inverse
+proxy for it and enters the attribution with the wrong sign. Removing both restores the
+association to $0.656$, close to the full encoding, and
+raises the fraction of molecules in which it is positive to 99.0\%. The trained models
+behave the same way: $0.429$ under the full encoding, $0.250$ with degree alone removed and
+$0.421$ with both removed, and the toxicophore agreement follows, at $1.265$, $1.174$ and
+$1.278$.
+
+Test performance is unchanged throughout, at $0.785$, $0.786$ and $0.784$; the largest
+difference between encodings is $0.0022$ ROC-AUC, roughly a sixth of the effect of changing
+the molecular representation, so the changes in association cannot be read as a weakening of the
+models.
+
+
+The attribution baseline qualifies this. Integrating from the origin places the reference
+outside the space the model was trained on, since no atom has an all-zero one-hot block.
+Repeating the untrained measurement from the dataset-average atom vector over five hundred
+draws gives $0.673$, $0.603$ and $0.576$ for the three encodings, a monotone decline: the
+restoration seen under the zero baseline does not appear, and the ordering of the two reduced
+encodings reverses. The trained models behave the same way, $0.380$, $0.321$ and $0.230$
+against $0.429$, $0.250$ and $0.421$ under the zero baseline (Supporting Information). Part
+of the association is therefore attributable to the encoding after all, and the ablation
+bounds the two paths rather than separating them.
+
+What the ablation establishes is narrower than it first appears. Under either baseline the
+association survives the removal of degree, at $0.497$ and $0.656$ from the zero
+baseline and $0.603$ and $0.576$ from the on-manifold one. Message passing therefore produces a
+degree-like ranking without being given degree.
+What the ablation does not establish is that the encoding plays no part: under the more
+defensible baseline the association falls by 14\% as degree-related
+features are withdrawn,
+so both paths contribute and their shares are not separated here.
+
+\subsection{The specificity check in full}
+
+Everything above is measured on mutagenic compounds. A ranking that favours fused rings will
+score well there whether or not it has learned anything about mutagenicity, and nothing so
+far tests what a model does with an alert substructure in a compound that is not mutagenic.
+The 168 non-mutagenic test compounds carrying a partial alert match provide that test.
+
+It requires a signed aggregation. Summing the absolute value over feature dimensions, which
+is the convention used elsewhere in this work, cannot distinguish an atom pushing the
+prediction towards mutagenic from one pushing it away, and a model that recognises an alert
+and discounts it in context would score highly under either. Both sets are therefore rescored
+with the sign retained (Supporting Information).
+
+The degree ranking gives $0.580$ on the mutagenic set and $0.590$ on the non-mutagenic one,
+alike in both as a ranking that cannot see the label should be. GIN exceeds it by $+0.089$
+($+0.049$ to $+0.126$) and by $+0.039$ ($-0.006$ to $+0.083$) respectively; GAT differs by
+$-0.032$ ($-0.071$ to $+0.006$) and $-0.055$ ($-0.094$ to $-0.018$); GCN by $+0.031$ and
+$+0.031$.
+
+Restricting the mutagenic set to the 205 molecules the model classifies correctly raises
+GIN's advantage, under the absolute convention of the Supporting Information, from $+0.056$ to
+$+0.065$ ($+0.022$ to $+0.106$), which is the direction the
+pre-specified reading anticipated: attributions from molecules the model got wrong were
+diluting the estimate. The change is small and we report the unrestricted figure as the
+headline, since the restriction conditions on an outcome of the model being evaluated.
+
+The pre-specified reading was that the two differences should separate, in the direction
+of a smaller advantage where alert atoms do not carry the endpoint. Testing the difference
+between them directly, with the models shared across the two sets and the molecules resampled
+within each, GIN gives $-0.050$ ($-0.090$ to $-0.011$), which survives Holm
+across the three architectures at $p = 0.037$ (Supporting Information). GAT gives $-0.024$
+($-0.065$ to $+0.018$) and GCN $+0.000$ ($-0.042$ to $+0.042$); neither resolves.
+
+On this partition one architecture therefore discounts alert atoms where they do not carry
+the endpoint, and two do not measurably.
+
+The replication that led us to withdraw the claim is reported in the main text.
+
+\subsection{The two sets of trained models}
+
+Two sets of trained models appear in what follows. The twenty above were fitted with their
+weights retained, which is what allows every attribution method to be recomputed on each; an
+earlier set of fifty, for which only the overlap at the reference fraction was stored,
+supports the paired comparison against the untrained distribution. Their means agree within
+sampling error ($1.265$ and $1.242$, $z = 0.94$).
+
+Training does contribute. Against the untrained distribution, those fifty models give a
+paired difference of $+0.126$ (95\% CI $0.057$ to $0.202$, Wilcoxon $p = 0.0013$), improving
+126 of 237 molecules with a matched-pairs rank-biserial correlation of $0.24$. Resampling
+molecules and models together widens the interval only slightly, from $0.145$ to $0.158$. At
+the level of individual draws, though, the separation is far from complete: a trained model
+exceeds an untrained one in 89\% of pairs and exceeds the degree value in 62\% of draws.
+
+\subsection{The structural ranking panel on the designated partition}
+
+Table~\ref{tab:regimes} gives the eleven model-free structural rankings under the three
+regimes of the alert library, which is the screen that selected the baseline.
+
+\input{tables/tab_regimes}
+
+\subsection{Alerts and rankings on individual molecules}
+
+Figure~\ref{fig:examples} shows the alerts and three of the rankings on three molecules
+chosen on structure alone, with the overlap and the chance level for each.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/fig06_examples.pdf}
+\caption{Alerts and three rankings on individual molecules. Molecules were chosen on
+structure alone: from those in which the alerts cover between a fifth and a half of the
+atoms, the three whose atom count is closest to the median. Each panel reports the overlap
+and the chance level for that molecule.}
+\label{fig:examples}
+\end{figure}
+
+\subsection{Controls on both model families}
+
+The three control distributions differ from the untrained networks at the level of
+distributions rather than merely of means (permutation $p < 0.001$ in each case), though the
+separation is not absolute: a random weighting of atom features exceeds an untrained network
+in one pair out of four (Supporting Information). The effect therefore requires message
+passing and is not produced by the atom features or by the bit-to-atom map alone.
+
+
+Under permuted labels both families lose their agreement. Graph models absorbed the
+randomised labels in all fourteen repeats, reaching a training ROC-AUC of $0.874$ while
+generalising to nothing ($0.492$ against the true test labels), and their attributions fall
+to $1.036 \pm 0.074$, below the untrained distribution. The gradient-boosted model absorbed
+its randomised labels more thoroughly ($0.973$) and its TreeSHAP attributions collapse to
+$0.995 \pm 0.054$.
+
+The graph result cannot be read as a statement about the labels. Fitting the permuted labels
+required regularisation and early stopping to be switched off and the budget escalated, and
+the models the drop is measured against were trained under none of that. Fitting the real
+labels under the same regime gives $1.089$ ($1.021$ to $1.157$), an interval that contains
+the permuted value of $1.036$. The drop is therefore attributable to the training regime
+rather than to the randomisation, and we withdraw the reading that ascribed it to the labels.
+
+Two caveats attach even to that. The matched arm reaches a training ROC-AUC of $0.9996$
+against $0.874$ for the permuted one, so the two fitted their targets to different degrees
+and the regimes are not identical. And eight models is a small arm. What the control now
+supports is narrow: agreement is not immune to how a model is fitted, which is weaker than
+what we previously claimed from it.
+
+\subsection{The attribution rule and the representation}
+
+The comparison between TreeSHAP and Integrated Gradients differs on two axes at once, the
+attribution rule and the molecular representation. Fingerprint bits are substructure counters
+and the alerts are substructures, so the fingerprint arm is aligned with the target by
+construction. Applying Integrated Gradients to a multilayer perceptron over the same
+fingerprints, and distributing the attributions through the same bit-to-atom map, separates
+the two.
+
+That model reaches $0.767$ test ROC-AUC and its attributions give $1.417 \pm 0.011$ under a
+signed aggregation and $1.169 \pm 0.047$ under an absolute one. TreeSHAP on the fingerprint
+model gives $1.542$ signed and $1.442$ absolute; the graph model gives $1.226$ absolute and
+$1.068$ signed. These are single-model figures, computed on the designated model of the attribution
+analysis so that the four conventions are comparable; the mean over the twenty models under
+the absolute convention is $1.265$. Neither axis dominates, and the aggregation convention interacts with the
+representation: under an absolute convention the graph model exceeds the fingerprint network,
+and under a signed convention the order reverses by a wide margin. The difficulty is shared
+between the gradient rule and the graph representation rather than belonging to either.
+
+\subsection{Mask-based explanation}
+
+GNNExplainer was measured on five trained models under three settings. Agreement is
+$0.970 \pm 0.100$ at the default setting, $1.060 \pm 0.091$ with a longer optimisation and
+$0.911 \pm 0.051$ with weaker mask regularisation, with nine of the fifteen runs below chance.
+Pooled over the fifteen runs the method is therefore indistinguishable from chance and far
+below the degree baseline,
+rather than reliably below chance as a single model had suggested.
+
+The mask entropy explains why. Normalised to the number of atoms it lies between $0.979$ and
+$0.995$ under every setting, so the learned mask stays close to uniform and the ranking it
+induces is arbitrary rather than uninformative. Repeating the method five times on one fixed
+model gives a mean top-30\% Jaccard of $0.63$ against $0.99$ for Integrated Gradients, which
+is deterministic given the model; the two are not comparable as measures of stability, and
+the difference reflects the optimisation rather than the quality of the explanation.
+
+\section{Predictive performance in full}
+
+Under scaffold-disjoint cross-validation each of the 7,255 compounds receives one prediction
+from a model that never saw its scaffold. GAT leads at $0.854$ ROC-AUC, GIN and XGBoost on
+descriptors follow at $0.845$, and the random forest trails at $0.821$
+(Figure~\ref{fig:accuracy}a, Table~\ref{tab:accuracy}). Eleven of the fifteen pairwise comparisons among the six main
+models are resolved after correction for multiple testing.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fig07_accuracy.pdf}
+\caption{(a) Out-of-fold ROC-AUC with bootstrap intervals over all 7,255 compounds. (b)
+Paired contrasts isolating the representation, the learner, the model family and bond
+features.}
+\label{fig:accuracy}
+\end{figure}
+
+\input{tables/tab_accuracy}
+
+What matters here is not the ordering but what moves it (Figure~\ref{fig:accuracy}b, Table~\ref{tab:contrasts}). Changing
+the molecular representation of a fixed learner, from fingerprints to descriptors, is worth
+$+0.013$ ROC-AUC (95\% CI $0.006$ to $0.019$, $p = 0.0002$). The gap between the two families
+is $+0.0146$ ($0.0088$ to $0.0204$, $p < 0.001$) in favour of the graph models. The leading
+member of each family, GAT and XGBoost on descriptors, differ by $+0.0088$ ($0.0016$ to
+$0.0158$), a margin whose interval excludes zero but which does not survive Holm correction
+across the fifteen pairwise comparisons ($p = 0.056$, Supporting Information). GIN, which carries the
+attribution analysis below, is not the best graph model: it trails GAT by $0.0087$, and that
+difference is resolved after correction ($p = 0.008$). Against XGBoost on descriptors GIN
+differs by $+0.0001$ ($-0.007$ to $0.007$).
+
+The picture is one of a narrow advantage rather than none, at the edge of what this design can
+resolve.
+
+\input{tables/tab_contrasts}
+
+One representational choice inside the graph family is inert: removing bond features changes
+ROC-AUC by $+0.002$ for GIN ($p = 0.47$) and $-0.0002$ for GAT ($p = 0.93$). Whatever
+separates the graph models from the fingerprint baseline, access to bond information is not
+it.
+
+Two further reference points frame the scale. A tuned logistic regression on the same
+fingerprints reaches $0.761$ on the designated partition against $0.806$ for XGBoost on
+descriptors, so feature interactions contribute less on this endpoint than is usually
+assumed. The structural-alert classifier, which does no learning at all, reaches $0.678$;
+57.7\% of test compounds carry at least one alert.
+
+\section{Agreement across architectures and against performance}
+
+Figure~\ref{fig:si_arch} gives the comparison against the model-free baseline for twenty
+models in each of the three architectures. It is the same comparison the manuscript reports
+numerically in Table~1, shown here so that the spread within each architecture is visible
+beside the paired interval.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/fig10_architectures.pdf}
+\caption{Toxicophore agreement of twenty models in each of three architectures. The shaded
+band is the baseline's bootstrap interval; the bar to the right of each group is the paired
+interval on the difference from the baseline, drawn about it.}
+\label{fig:si_arch}
+\end{figure}
+
+Figure~\ref{fig:si_models} shows the twenty GIN models against the baseline and the same
+agreement against test performance. The second panel carries no claim: every
+within-architecture interval contains zero, and the manuscript draws no conclusion from it.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{figures/fig04_models.pdf}
+\caption{(a) Toxicophore agreement of twenty independently trained models against the
+model-free baseline. (b) The same agreement against test performance.}
+\label{fig:si_models}
+\end{figure}
+
+\section{Supporting tables from the main analyses}
+
+Table~\ref{tab:kfraction} gives the comparison against the degree ranking across five
+retained fractions, which the manuscript summarises.
+
+\input{tables/tab_kfraction}
+
+Table~\ref{tab:replication} gives the aggregate difference from the degree ranking on each of
+the three partitions drawn with the corrected splitter.
+
+\input{tables/tab_replication}
+
+Table~\ref{tab:dod_replication} repeats the specificity check on those three partitions. It is
+the analysis on which the manuscript withdraws the claim.
+
+\input{tables/tab_dod_replication}
+
+
+Eleven tables referred to in the main text are collected here.
+
+Table~\ref{tab:auroc} gives agreement as the area under the ROC curve for alert membership,
+computed per model against the degree ranking on the ranking AUROC, which the main text
+reports as primary.
+
+\input{tables/tab_auroc}
+
+Table~\ref{tab:regime_trained} places the trained models beside the model-free baseline under
+the two reduced regimes of the alert library, which is the decomposition of the main text.
+
+\input{tables/tab_regime_trained}
+
+Table~\ref{tab:dod} reports the difference between the two evaluation sets under a signed
+aggregation, the specificity check on the designated partition.
+
+\input{tables/tab_dod}
+
+Table~\ref{tab:shares} gives the share of each architecture's above-chance signal that the
+model-free ranking accounts for.
+
+\input{tables/tab_shares}
+
+Table~\ref{tab:architectures} reports attribution across the three architectures with twenty
+models each, together with the within-molecule association with degree.
+
+\input{tables/tab_architectures}
+
+Table~\ref{tab:controls} collects the references and negative controls on the 237 evaluation
+molecules at the reference retained fraction.
+
+\input{tables/tab_controls}
+
+Table~\ref{tab:encoding} reports what removing atom degree from the input encoding does to the
+association and to test performance.
+
+\input{tables/tab_encoding}
+
+Table~\ref{tab:correlation} decomposes what the per-molecule correlation with the degree
+ranking measures.
+
+\input{tables/tab_correlation}
+
+Table~\ref{tab:performance} sets agreement with the alerts against predictive performance
+within each architecture.
+
+\input{tables/tab_performance}
+
+Table~\ref{tab:intervals} gives the model-free baseline with its interval, and the association
+with degree on the second molecule set.
+
+\input{tables/tab_intervals}
+
+Table~\ref{tab:specificity} reports the mutagenic and non-mutagenic evaluation sets under the
+signed aggregation the specificity check requires.
+
+\input{tables/tab_specificity}
+
+\section{The structural ranking panel on the corrected partitions}
+
+Atom degree was chosen as the baseline on a screen of eleven structural rankings across three
+regimes of the alert library, carried out on the designated partition. Because the screen and
+every comparison that followed it used the same molecules, the selection could in principle be
+a property of that partition. It is repeated here on the three partitions of the replication
+analysis, drawn with the random-order splitter.
+
+None of the eleven rankings needs a model, so the repetition costs nothing beyond the scoring.
+Each ranking is computed from the molecular graph alone, atoms are retained at the same
+fraction of $0.30$, ties at the cut are broken at random and averaged over two hundred draws,
+and the interval on each lift comes from ten thousand resamples of the molecules. A ranking
+passes a regime when the lower bound of that interval lies above chance for the regime. The
+designated partition is included as a control: the rewritten scoring path reproduces the
+published lifts to within $0.002$.
+
+Table~\ref{tab:si_panel} repeats that screen on the three partitions drawn with the corrected
+splitter.
+
+\input{tables/tabS16_panel}
+
+\section{What the non-nested hyperparameter search cost}
+
+The hyperparameter search was run once on the designated partition and the selected
+configurations were reused in the cross-validation, so the 725 compounds of that partition's
+validation set appear in the test folds. Whether this affects the comparison between models,
+rather than only their absolute level, can be measured from the stored predictions.
+
+Every compound has an out-of-fold prediction from every model. Splitting those predictions
+into the 725 compounds the search evaluated against and the 6,530 it did not, and scoring each
+model on both, gives a per-model optimism. Intervals come from ten thousand resamples of the
+compounds within each subset, with the same draws used for every model so that a difference
+between two of them can be read from the same resampling. The quantity of interest is the
+difference between the family means, which carries its own interval from those shared draws.
+
+Only the validation compounds are treated as exposed. The training compounds of the designated
+partition were seen by the search as well, but the cross-validation refits every model from
+scratch within each fold, so a compound in a fold's training set contributes to that fold's
+model whether or not the search saw it; what the search could have overfitted is the
+configuration, and the configuration was chosen against the validation set alone.
+
+The two subsets are not matched on difficulty, so the absolute gap between them is not
+interpretable. Only its spread across models bears on a contrast between models, and the
+search set is a tenth of the data, so an optimism difference translates into about a tenth of
+itself on the pooled estimate.
+
+Table~\ref{tab:si_optimism} gives out-of-fold performance on the 725 compounds the search saw
+and on the 6,530 it did not, per model.
+
+\input{tables/tabS17_optimism}
+
+\section{The fused-aromatic alert}
+
+The pattern supplying most of the alert atoms is our own encoding of a class that Kazius and
+co-workers describe rather than specify. Table~\ref{tab:si_pattern} repeats the regime
+analysis under three readings of it, obtained by merging aromatic rings that share atoms into
+systems and thresholding on the number of rings in a system. This is not a named
+substructure: a query for anthracene matches linear acenes only and would miss phenanthrene,
+chrysene and benzo[a]pyrene, whose rings are fused angularly and which carry the mechanism
+that matters here.
+
+\input{tables/tabS14_pattern}
+
+\section{The attribution baseline}
+
+Integrated Gradients is computed in the main text from a zero baseline, which for one-hot
+inputs lies outside the space the model was trained on. Table~\ref{tab:si_baseline} repeats
+the untrained measurement from the dataset-average atom vector instead. Over five hundred draws with percentile intervals, the association with
+degree is lower under the on-manifold baseline and survives under every encoding, but the
+ordering of the two reduced encodings reverses: under the zero baseline removing degree
+together with hydrogen count restores the association, and under the on-manifold baseline it
+does not. The main text reports this and reads the ablation accordingly.
+
+\input{tables/tabS13_baseline}
+
+\section{The second molecule set}
+
+The association between an untrained network's attributions and atom degree was repeated on
+molecules from the blood--brain barrier penetration dataset distributed with MoleculeNet.
+From the compounds that parse and carry at least four heavy atoms, 299 were drawn at random
+under a fixed seed; no property or label was used in the selection, since the measurement
+needs neither.
+
+\section{Bit-to-atom ambiguity and the effect of training}
+
+\input{tables/tabS11_misc}
+
+Every one of the 2,048 fingerprint bits carries more than one atom environment somewhere in
+the dataset. A TreeSHAP value assigned to a bit is therefore shared among chemically distinct
+environments, and distributing it to atoms in one molecule imports information from others.
+This works against the fingerprint arm, so its strong performance in the main text is a lower
+bound rather than an upper one.
+
+The regression takes as its target the difference between the trained and untrained overlap
+for the same molecule, which is the quantity the claim concerns. It has $n = 237$ and three
+predictors, all standardised, fitted by ordinary least squares with no selection: the
+heteroatom fraction, the within-molecule standard deviation of atom degree, and the fraction
+of atoms covered by alerts. Coefficients, standard errors and variance inflation factors are
+given in Table~\ref{tab:si_misc}. An earlier specification
+used the raw overlap while including alert coverage as a predictor; since chance overlap is
+alert coverage, that specification was close to tautological and is not reported.
+
+\section{Code and data}
+
+The dataset is publicly available through the Therapeutics Data Commons. The pipeline is
+released as notebooks covering data preparation and hyperparameter search, final
+fitting, the multi-partition benchmark, cross-validation, attribution and negative controls,
+structural baselines, the architecture and encoding comparisons, the threshold-free and
+regime analyses, and the replication on corrected partitions. All random seeds
+are fixed. Model weights, the raw atom-level attributions of the graph models and the fold
+assignments are retained, a manifest records which stage produced each result file, and a
+companion file lists every quantity quoted in the manuscript. The atom-level TreeSHAP values
+were not kept.
+The repository is named in the Data and Software Availability statement of the manuscript.
+
+\bibliography{references}
+
+\end{document}

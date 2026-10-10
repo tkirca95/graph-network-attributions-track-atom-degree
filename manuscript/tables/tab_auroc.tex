@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{Agreement as the area under the ROC curve for alert membership, computed per molecule and averaged, with the share of the top-30\% set that a tie at the cut decides.}
+\label{tab:auroc}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Ranking & $n$ & AUROC & Tie fraction \\
+\midrule
+atom degree & 1 & 0.580 & 0.87 \\
+random ranking & 20 & 0.492 & 0.18 \\
+trained GIN, IG & 20 & 0.637 & 0.19 \\
+trained GAT, IG & 20 & 0.595 & 0.19 \\
+trained GCN, IG & 20 & 0.598 & 0.20 \\
+Gradient x Input & 20 & 0.610 & -- \\
+Saliency & 20 & 0.644 & -- \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize A value of 0.5 is chance. The tie fraction is $0.87$ for atom degree, which takes five values across the dataset and fewer within a molecule. The floor is not zero: a continuous ranking still has the atom at the cut itself, which is $1/k$ and gives $0.18$ for a random ranking, so the attributions at about $0.19$ are effectively tie-free. Differences from the degree ranking, with their intervals and corrected $p$-values, are in Table~2 of the manuscript. TreeSHAP is absent because its atom-level scores were not retained.\end{flushleft}
+\end{table}

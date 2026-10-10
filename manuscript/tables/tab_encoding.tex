@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Removing atom degree from the input encoding. $\rho$ is the within-molecule association between Integrated Gradients and atom degree, over 500 untrained initialisations and over twenty trained models; lift and test performance are for the trained models.}
+\label{tab:encoding}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Encoding & Untrained $\rho$ ($n$=500) & Trained $\rho$ ($n$=20) & Lift & Test ROC-AUC \\
+\midrule
+Full (24 features) & 0.682 [0.440, 0.825] & 0.429 $\pm$ 0.109 & 1.265 $\pm$ 0.092 & 0.7849 \\
+Degree removed (23) & 0.497 [0.138, 0.696] & 0.250 $\pm$ 0.129 & 1.174 $\pm$ 0.090 & 0.7861 \\
+Degree and hydrogen count removed (22) & 0.656 [0.507, 0.772] & 0.421 $\pm$ 0.103 & 1.278 $\pm$ 0.083 & 0.7838 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Degree and hydrogen count are complementary at fixed valence, so removing degree alone leaves hydrogen count as an inverse proxy for it. Removing both restores the association, which is why the third row rather than the second is the clean comparison. Test performance is unchanged throughout.\end{flushleft}
+\end{table}

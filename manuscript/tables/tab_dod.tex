@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{The difference between the two evaluation sets under a signed aggregation, with Holm correction across the three architectures.}
+\label{tab:dod}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Architecture & Mutagenic & Non-mutagenic & Difference & 95\% CI & $p$ (Holm) \\
+\midrule
+GIN & +0.089 & +0.039 & -0.050$^{*}$ & -0.090 to -0.011 & 0.0366 \\
+GAT & -0.032 & -0.055 & -0.024 & -0.065 to +0.018 & 0.5267 \\
+GCN & +0.031 & +0.031 & +0.000 & -0.042 to +0.041 & 0.9747 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Columns two and three are each architecture's advantage over the degree ranking on that set. The pre-registered direction is negative: a model using the chemistry should rank alert atoms lower where they do not carry the endpoint. Ten models per architecture, 237 mutagenic and 168 non-mutagenic molecules.\end{flushleft}
+\end{table}

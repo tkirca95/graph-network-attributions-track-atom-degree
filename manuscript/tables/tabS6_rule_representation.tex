@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{The attribution rule and the molecular representation, separated. Applying Integrated Gradients to a network over the same fingerprints, through the same bit-to-atom map, fills the missing cell of the design.}
+\label{tab:si_2x2}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllc}
+\toprule
+Representation & Rule & Convention & Lift \\
+\midrule
+Molecular graph & Integrated Gradients & Absolute & 1.226 \\
+Molecular graph & Integrated Gradients & Signed & 1.068 \\
+Molecular graph & Gradient $\times$ Input & Absolute & 1.216 \\
+Molecular graph & Gradient $\times$ Input & Signed & 1.170 \\
+Molecular graph & Saliency & Absolute & 1.178 \\
+Molecular graph & Saliency & Signed & 1.092 \\
+Fingerprint & TreeSHAP & Absolute & 1.442 \\
+Fingerprint & TreeSHAP & Signed & 1.542 \\
+Fingerprint & Integrated Gradients & Absolute & 1.169 \\
+Fingerprint & Integrated Gradients & Signed & 1.417 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The fingerprint network reaches 0.767 test ROC-AUC. Neither axis dominates, and the aggregation convention interacts with the representation.\end{flushleft}
+\end{table}

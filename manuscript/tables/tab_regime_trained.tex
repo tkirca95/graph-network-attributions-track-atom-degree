@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+\centering
+\caption{Trained models and the model-free baseline under the two reduced regimes of the alert library. Differences carry a paired resampling of molecules and models, as in Table~1 of the manuscript, which gives the same comparison over the full library; percentages are of the attainable above-chance range for that regime.}
+\label{tab:regime_trained}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcccc}
+\toprule
+Regime & Arm & Lift & \% of range & $\Delta$ vs.\ degree & 95\% CI \\
+\midrule
+No fused aromatic ($n$ = 174) & Atom degree & 1.295 & 16 & -- & -- \\
+ & Trained GIN & 1.737 & 40 & +0.442$^{*}$ & +0.304 to +0.588 \\
+ & Trained GAT & 1.354 & 19 & +0.058 & -0.036 to +0.155 \\
+ & Trained GCN & 1.184 & 10 & -0.112 & -0.236 to +0.020 \\
+Fused aromatic only ($n$ = 97) & Atom degree & 1.172 & 31 & -- & -- \\
+ & Trained GIN & 0.941 & -11 & -0.231$^{*}$ & -0.325 to -0.144 \\
+ & Trained GAT & 1.109 & 19 & -0.062 & -0.135 to +0.006 \\
+ & Trained GCN & 1.144 & 26 & -0.027 & -0.107 to +0.051 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize An asterisk marks a difference resolved after Holm correction across the six tests in the two reduced regimes. Seven molecules the reduced libraries admit carry no stored attribution scores and are set aside, so every arm of a regime is scored on the same molecules; the counts given here are after that exclusion. GIN exceeds the baseline on the heteroatom-centred alerts and falls below it on the all-carbon pattern; the two effects have opposite signs and the full library averages them.\end{flushleft}
+\end{table}

@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Sensitivity of the untrained association to the Integrated Gradients baseline, over five hundred initialisations with percentile intervals.}
+\label{tab:si_baseline}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+Encoding & $\rho$, zero baseline & $\rho$, mean baseline \\
+\midrule
+Full (24 features) & 0.682 [0.440, 0.825] & 0.673 [0.529, 0.765] \\
+Degree removed (23) & 0.497 [0.138, 0.696] & 0.603 [0.416, 0.726] \\
+Degree and hydrogen count removed (22) & 0.656 [0.507, 0.772] & 0.576 [0.402, 0.708] \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize A zero baseline is off-manifold for one-hot inputs. The ordering of the two reduced encodings reverses between the baselines, which is why the encoding ablation is read as bounding rather than settling the question.\end{flushleft}
+\end{table}

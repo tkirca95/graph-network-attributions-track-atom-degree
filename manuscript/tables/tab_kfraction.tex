@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Agreement across retained fractions. Entries are the difference between a trained architecture and the degree ranking.}
+\label{tab:kfraction}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Retained fraction & Degree lift & GIN & GAT & GCN \\
+\midrule
+0.10 & 1.202 & +0.229$^{*}$ & +0.136$^{*}$ & +0.055 \\
+0.20 & 1.218 & +0.128$^{*}$ & +0.034 & -0.031 \\
+0.30 & 1.214 & +0.052 & -0.011 & -0.061$^{*}$ \\
+0.40 & 1.168 & +0.032 & -0.014 & -0.046$^{*}$ \\
+0.50 & 1.108 & +0.040 & +0.000 & -0.014 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize An asterisk marks a difference resolved at 0.05. The three cells at the smallest fraction carry a claim of presence and are corrected across that subfamily; the twelve at larger fractions carry a claim of absence, which a correction can only make harder to overturn, and are reported uncorrected. The $p$-values come from a recomputation with two hundred tie-breaks on every arm, which reproduces the differences shown here to within $0.001$ at the reference fraction.\end{flushleft}
+\end{table}

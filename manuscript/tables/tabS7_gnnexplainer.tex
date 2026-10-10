@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\caption{Mask-based explanation under three settings. Entropy is normalised to the number of atoms, so a value near one means the learned mask is close to uniform and the ranking it induces is arbitrary.}
+\label{tab:si_gnnexplainer}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Setting & Models & Epochs & Lift & Mask entropy \\
+\midrule
+default & 5 & 100 & 0.970 $\pm$ 0.100 & 0.995 \\
+longer & 5 & 300 & 1.060 $\pm$ 0.091 & 0.979 \\
+weak\_reg & 5 & 100 & 0.911 $\pm$ 0.051 & 0.994 \\
+\bottomrule
+\end{tabular}
+\end{table}

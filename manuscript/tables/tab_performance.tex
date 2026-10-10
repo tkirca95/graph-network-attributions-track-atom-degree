@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\caption{Agreement with the alerts against predictive performance, within each architecture and pooled.}
+\label{tab:performance}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Scope & $n$ & ROC-AUC range & $r$ & 95\% CI \\
+\midrule
+GIN & 20 & 0.758--0.801 & 0.256 & -0.21 to +0.63 \\
+GAT & 20 & 0.759--0.803 & 0.272 & -0.19 to +0.64 \\
+GCN & 20 & 0.751--0.793 & 0.293 & -0.17 to +0.65 \\
+All three & 60 & 0.751--0.803 & 0.394 & +0.16 to +0.59 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Within an architecture no relation is resolvable. The pooled correlation is confounded with architecture identity, since GIN has both the highest mean performance and the highest agreement and GCN the lowest of each.\end{flushleft}
+\end{table}

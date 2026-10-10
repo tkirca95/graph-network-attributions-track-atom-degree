@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\caption{The eighteen structural alerts, with the number of the 237 evaluation molecules each matches and its share of all alert atoms. Shares sum to more than 100\% because patterns overlap.}
+\label{tab:si_smarts}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcc}
+\toprule
+Alert & SMARTS & Molecules & Share of alert atoms \\
+\midrule
+polycyclic aromatic & \texttt{\detokenize{c1ccc2ccccc2c1}} & 97 & 61.8 \\
+aromatic amine & \texttt{\detokenize{[a][NX3;H2,H1;!$(N[!#6]);!$(N=*)]}} & 50 & 6.2 \\
+epoxide & \texttt{\detokenize{C1OC1}} & 43 & 7.0 \\
+aromatic nitro & \texttt{\detokenize{[a][N+](=O)[O-]}} & 32 & 7.1 \\
+michael acceptor & \texttt{\detokenize{[CX3]=[CX3][CX3]=[OX1]}} & 30 & 7.5 \\
+aziridine & \texttt{\detokenize{C1NC1}} & 15 & 2.7 \\
+aliphatic halide & \texttt{\detokenize{[CX4][F,Cl,Br,I]}} & 10 & 2.1 \\
+azo aromatic & \texttt{\detokenize{[a][NX2]=[NX2][a]}} & 8 & 3.3 \\
+nitrogen mustard & \texttt{\detokenize{[NX3]([CX4][CX4][F,Cl,Br,I])[CX4][CX4][F,Cl,Br,I]}} & 7 & 2.2 \\
+nitrosamine & \texttt{\detokenize{[NX3][NX2]=[OX1]}} & 5 & 1.0 \\
+alkyl sulfonate & \texttt{\detokenize{[CX4][OX2][SX4](=[OX1])(=[OX1])}} & 3 & 0.7 \\
+hetero hetero bond & \texttt{\detokenize{[N,O;H1,H2][N,O;H1,H2]}} & 3 & 0.3 \\
+azide & \texttt{\detokenize{[NX2]=[NX2+]=[NX1-]}} & 3 & 0.4 \\
+aromatic hydrazine & \texttt{\detokenize{[a][NX3;H1][NX3;H2]}} & 1 & 0.1 \\
+alkyl nitrite & \texttt{\detokenize{[CX4][OX2][NX2]=[OX1]}} & 0 & 0.0 \\
+aromatic nitroso & \texttt{\detokenize{[a][NX2]=[OX1]}} & 0 & 0.0 \\
+aromatic hydroxylamine & \texttt{\detokenize{[a][NX3;H1][OX2;H1]}} & 0 & 0.0 \\
+aromatic azoxy & \texttt{\detokenize{[a][NX2]=[NX3+]([O-])[a]}} & 0 & 0.0 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The pattern matching fused aromatic systems is composed entirely of carbon; the remaining seventeen are centred on heteroatoms, of which thirteen match anything here. The two groups reward opposite rankings, so a single agreement figure averages two regimes.\end{flushleft}
+\end{table}

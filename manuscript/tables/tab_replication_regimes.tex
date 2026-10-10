@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\caption{The regime decomposition on the same three partitions. Entries are the difference between a trained GIN and the degree ranking.}
+\label{tab:replication_regimes}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Regime & 201 & 202 & 203 \\
+\midrule
+Heteroatom alerts & +0.479$^{*}$ & +0.246$^{*}$ & +0.622$^{*}$ \\
+Fused aromatic (SMARTS) & -0.309$^{*}$ & -0.125$^{*}$ & -0.321$^{*}$ \\
+Fused, two or more rings & -0.293$^{*}$ & -0.197$^{*}$ & -0.425$^{*}$ \\
+Fused, three or more & -0.180$^{*}$ & -0.146$^{*}$ & -0.317$^{*}$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Every one of the twelve intervals excludes zero, and the sign is the same on every partition and under every reading of the fused-aromatic alert. On the designated partition the two SMARTS regimes give $+0.442$ and $-0.231$.\end{flushleft}
+\end{table}

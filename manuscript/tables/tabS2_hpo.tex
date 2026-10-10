@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+\centering
+\caption{Hyperparameter search. Every model received the same number of trials over its own space, and the search and the final fits used one training protocol.}
+\label{tab:si_hpo}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccc}
+\toprule
+Model & Trials & Validation ROC-AUC & Search time (min) \\
+\midrule
+XGBoost (ECFP4) & 100 & 0.839 & 2.185 \\
+Random forest (ECFP4) & 100 & 0.833 & 15.259 \\
+GCN & 100 & 0.849 & 63.140 \\
+GIN & 100 & 0.852 & 69.288 \\
+GAT & 100 & 0.847 & 104.779 \\
+XGBoost (RDKit-2D) & 100 & -- & -- \\
+Logistic regression (ECFP4) & 100 & -- & -- \\
+GIN and GAT, no bond features & 100 & -- & -- \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Recorded search time is 17.4 minutes for the two classical models timed and 237.2 for the three graph models, a ratio of 13.6 to 1. Timings for the descriptor model, the logistic regression and the ablated graph variants were not recorded, so the ratio is a lower bound on the classical side and should be read as an order of magnitude. Selected configurations are released as JSON.\end{flushleft}
+\end{table}

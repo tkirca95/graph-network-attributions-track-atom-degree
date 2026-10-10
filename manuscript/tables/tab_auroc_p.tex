@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{Agreement on the threshold-free measure, with bootstrap $p$-values and Holm correction across the five attribution comparisons.}
+\label{tab:auroc_p}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Ranking & $n$ & $\Delta$ vs.\ degree & 95\% CI & $p$ & $p$ (Holm) \\
+\midrule
+random ranking & 20 & -0.087$^{*}$ & -0.106 to -0.068 & 0.0002 & -- \\
+trained GIN, IG & 20 & +0.056$^{*}$ & +0.019 to +0.093 & 0.0036 & 0.0144 \\
+trained GAT, IG & 20 & +0.015 & -0.007 to +0.037 & 0.1680 & 0.3360 \\
+trained GCN, IG & 20 & +0.018 & -0.013 to +0.048 & 0.2538 & 0.3360 \\
+Gradient x Input & 20 & +0.030 & -0.003 to +0.063 & 0.0766 & 0.2298 \\
+Saliency & 20 & +0.063$^{*}$ & +0.024 to +0.102 & 0.0018 & 0.0090 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize An asterisk marks a comparison resolved at 0.05 after correction. The random ranking is a control on the measure rather than a claim about a model and carries no corrected value; twenty independent rankings were drawn for it, as twenty models were fitted for each architecture.\end{flushleft}
+\end{table}

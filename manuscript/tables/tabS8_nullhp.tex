@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{Sensitivity of the untrained distribution to the size of the network. No training is involved.}
+\label{tab:si_nullhp}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Configuration & Hidden & Layers & Draws & Mean & SD \\
+\midrule
+selected & 64 & 4 & 200 & 1.113 & 0.061 \\
+narrow shallow & 32 & 2 & 200 & 1.094 & 0.085 \\
+wide deep & 256 & 5 & 200 & 1.132 & 0.055 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize For comparison, the three architectures reported in the main text give standard deviations of 0.059 (GIN), 0.125 (GAT) and 0.141 (GCN).\end{flushleft}
+\end{table}

@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{Ambiguity of the bit-to-atom map, and what predicts the change in agreement produced by training.}
+\label{tab:si_misc}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Fingerprint bits carrying more than one environment & 100.0\% \\
+Mean environments per shared bit & 11.9 \\
+Most environments on one bit & 33 \\
+Regression on the change in agreement: alert coverage & $\beta$ = -0.417, $p$ $<$ 0.001 \\
+Regression on the change in agreement: heteroatom fraction & $\beta$ = +0.795, $p$ $<$ 0.001 \\
+Regression on the change in agreement: degree spread & $\beta$ = -0.667, $p$ $<$ 0.001 \\
+Regression $R^2$ & 0.491 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize The regression target is the difference between the trained and untrained overlap for the same molecule. All variance inflation factors are below 2.6.\end{flushleft}
+\end{table}

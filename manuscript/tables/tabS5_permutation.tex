@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\caption{Permutation control. Labels were permuted and each model fitted with regularisation and early stopping switched off, escalating the budget until the randomised labels were absorbed.}
+\label{tab:si_permutation}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
+\toprule
+Family & Repeats & Absorbed & Training ROC-AUC & Test ROC-AUC & Lift \\
+\midrule
+Graph (GIN) & 14 & 14 & 0.874 & 0.492 & 1.036 $\pm$ 0.074 \\
+Tree (XGBoost) & 16 & 16 & 0.973 & 0.494 & 0.995 $\pm$ 0.054 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Training ROC-AUC is measured on the permuted labels and test ROC-AUC against the true labels. A model that has not absorbed the randomised labels tests nothing beyond an untrained one.\end{flushleft}
+\end{table}

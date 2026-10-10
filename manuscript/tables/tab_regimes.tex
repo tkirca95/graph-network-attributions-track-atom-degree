@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{Model-free structural rankings under three regimes of the alert library, with intervals from 10,000 resamples of the molecules.}
+\label{tab:regimes}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Ranking & Full & No fused aromatic & Fused aromatic only & $>$ chance \\
+\midrule
+Degree & 1.21 [1.18, 1.25] & 1.28 [1.22, 1.33] & 1.16 [1.13, 1.20] & 3/3 \\
+Hetero neighbours & 1.16 [1.11, 1.22] & 1.68 [1.58, 1.78] & 0.81 [0.78, 0.84] & 2/3 \\
+Degree deviation & 1.13 [1.07, 1.19] & 1.45 [1.35, 1.56] & 0.90 [0.84, 0.95] & 2/3 \\
+Hetero plus degree & 1.09 [1.04, 1.15] & 1.53 [1.44, 1.63] & 0.79 [0.73, 0.84] & 2/3 \\
+Abs formal charge & 1.07 [1.04, 1.09] & 1.17 [1.12, 1.23] & 0.99 [0.98, 1.00] & 2/3 \\
+Heteroatom & 1.06 [1.01, 1.11] & 1.51 [1.44, 1.59] & 0.74 [0.70, 0.78] & 2/3 \\
+Hetero or neighbour & 1.05 [0.99, 1.12] & 1.73 [1.63, 1.85] & 0.60 [0.55, 0.66] & 1/3 \\
+In ring & 0.98 [0.94, 1.02] & 0.82 [0.74, 0.90] & 1.10 [1.08, 1.13] & 1/3 \\
+Aromatic & 0.98 [0.93, 1.03] & 0.52 [0.45, 0.59] & 1.30 [1.25, 1.35] & 1/3 \\
+Rarity & 0.93 [0.85, 1.00] & 1.60 [1.46, 1.74] & 0.48 [0.41, 0.55] & 1/3 \\
+Hydrogens & 0.78 [0.73, 0.83] & 0.72 [0.63, 0.81] & 0.84 [0.80, 0.88] & 0/3 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Molecules, chance and ceiling: full 237, 0.436, 1.914; no polycyclic 181, 0.245, 2.834; polycyclic only 104, 0.640, 1.543. A lift of one is the level a random ranking attains by construction. The last column counts the regimes in which the interval excludes it; atom degree is the only ranking for which it does so in all three.\end{flushleft}
+\end{table}

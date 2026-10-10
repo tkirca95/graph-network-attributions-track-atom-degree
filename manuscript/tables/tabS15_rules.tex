@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{Every comparison made against the degree ranking, with its correction family and decision threshold.}
+\label{tab:si_rules}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llccl}
+\toprule
+Comparison & Table & Tests & Correction & Threshold \\
+\midrule
+Architectures, threshold-free & \ref{tab:auroc} & 5 & Holm & 0.05 on the corrected $p$ \\
+Random ranking against degree & \ref{tab:auroc} & 1 & none, a control on the measure & 0.05 \\
+Architectures, lift scale & Table~1 of the manuscript & 3 & Holm & 0.05 on the corrected $p$ \\
+Regime decomposition & \ref{tab:regime_trained} & 6 & Holm & 0.05 on the corrected $p$ \\
+Specificity, difference of differences & \ref{tab:dod} & 3 & Holm & 0.05 on the corrected $p$ \\
+Sweep, smallest fraction & Table~3 of the manuscript & 3 & Holm & 0.05 on the corrected $p$ \\
+Sweep, larger fractions & Table~3 of the manuscript & 12 & none, the claim drawn from them is one of absence & interval excluding zero \\
+Replication, three partitions & Table~6 of the manuscript & 3 & none, three pre-specified partitions & interval excluding zero \\
+Replication, regimes & Table~7 of the manuscript & 12 & none; the corresponding family was corrected on the designated partition & interval excluding zero \\
+Structural ranking panel & \ref{tab:regimes} & 33 & none, a screen that selected the baseline & interval excluding chance \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize Families were fixed before the corrected $p$-values were computed. Test counts are read from the tables themselves rather than stated, so a row cannot drift from what the table contains.\end{flushleft}
+\end{table}

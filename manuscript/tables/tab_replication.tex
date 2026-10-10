@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\caption{The threshold-free comparison repeated on three partitions drawn with the corrected splitter, five models each, against the designated partition of the manuscript.}
+\label{tab:replication}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccccc}
+\toprule
+Partition & $n$ & Random & Degree & GIN & $\Delta$ & 95\% CI & Tie \\
+\midrule
+Designated (size-ordered) & 237 & 0.492 & 0.580 & 0.637 & +0.056$^{*}$ & +0.019 to +0.093 & 0.868 \\
+201 (random order) & 302 & 0.497 & 0.607 & 0.640 & +0.033 & -0.002 to +0.065 & 0.849 \\
+202 (random order) & 349 & 0.499 & 0.571 & 0.646 & +0.075$^{*}$ & +0.018 to +0.124 & 0.895 \\
+203 (random order) & 257 & 0.496 & 0.536 & 0.672 & +0.136$^{*}$ & +0.088 to +0.191 & 0.905 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize An asterisk marks an interval excluding zero. Test sets of the three partitions share a mean Jaccard of 0.063 against 0.634 for the splitter used for the designated partition. The designated row carries twenty models; at five, resampling the twenty gives a mean interval width of 0.094 against 0.073, so the wider intervals here follow from the number of models rather than from the partition.\end{flushleft}
+\end{table}

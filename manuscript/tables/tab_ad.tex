@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Performance inside and outside the applicability domain, defined by a nearest-neighbour Tanimoto similarity of 0.30 to the training set.}
+\label{tab:ad}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\toprule
+Model & Inside & Outside & $\Delta$ & Range \\
+\midrule
+XGBoost (ECFP4) & 0.797 & 0.653 & -0.144 & -0.35 to -0.08 \\
+Random forest (ECFP4) & 0.816 & 0.629 & -0.187 & -0.41 to -0.09 \\
+GCN & 0.801 & 0.673 & -0.128 & -0.25 to -0.06 \\
+GIN & 0.819 & 0.734 & -0.084 & -0.17 to -0.02 \\
+GAT & 0.812 & 0.673 & -0.140 & -0.29 to -0.05 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}\footnotesize 599 compounds fall inside and 127 outside. A paired bootstrap gives a classical-minus-graph difference of -0.048 (95\% CI -0.145 to +0.043, $p$ = 0.35), so the families cannot be distinguished here.\end{flushleft}
+\end{table}
