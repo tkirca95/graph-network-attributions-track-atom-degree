@@ -1,7 +1,6 @@
 # Graph Network Attributions Track Atom Degree Before Training
 
-Code and materials for the manuscript, submitted to *Journal of Chemical Information and
-Modeling*.
+Code and materials accompanying the manuscript.
 
 Talha Kırca, Hasan Yıldırım, Merve Görgülü — Department of Data Science and Analytics,
 Karamanoğlu Mehmetbey University.
